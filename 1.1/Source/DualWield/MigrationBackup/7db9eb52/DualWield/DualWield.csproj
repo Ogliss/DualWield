@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DualWield</RootNamespace>
+    <AssemblyName>DualWield</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Alerts\Altert_SkillLow.cs" />
+    <Compile Include="Base.cs" />
+    <Compile Include="Command_DualWield.cs" />
+    <Compile Include="Harmony\Jobdriver_Wait.cs" />
+    <Compile Include="Harmony\Pawn_StanceTracker.cs" />
+    <Compile Include="Harmony\VerbTracker.cs" />
+    <Compile Include="ModExtension\DefModextension_CustomRotation.cs" />
+    <Compile Include="ModExtension\DefModextension_DefaultSettings.cs" />
+    <Compile Include="Settings\Dialog_Weapon_Rotation.cs" />
+    <Compile Include="DW_DefOff.cs" />
+    <Compile Include="Extensions\Ext_Pawn.cs" />
+    <Compile Include="Extensions\Ext_Pawn_EquipmentTracker.cs" />
+    <Compile Include="Extensions\Ext_ThingDef.cs" />
+    <Compile Include="Extensions\Ext_ThingWithComps.cs" />
+    <Compile Include="Extensions\Ext_Verb.cs" />
+    <Compile Include="Harmony\VerbProperties.cs" />
+    <Compile Include="Harmony\Verb_MeleeAttack.cs" />
+    <Compile Include="Settings\DictRecordHandler.cs" />
+    <Compile Include="Settings\GUIDrawUtility.cs" />
+    <Compile Include="Harmony\Pawn_PathFollower.cs" />
+    <Compile Include="Harmony\Pawn.cs" />
+    <Compile Include="Harmony\PawnComponentsUtility.cs" />
+    <Compile Include="Harmony\PawnRenderer.cs" />
+    <Compile Include="Harmony\FloatMenuMakerMap.cs" />
+    <Compile Include="Harmony\PawnWeaponGenerator.cs" />
+    <Compile Include="Harmony\Pawn_EquipmentTracker.cs" />
+    <Compile Include="Harmony\Pawn_MeleeVerbs.cs" />
+    <Compile Include="Harmony\Pawn_RotationTracker.cs" />
+    <Compile Include="Harmony\Projectile.cs" />
+    <Compile Include="Harmony\RunAndGun.cs" />
+    <Compile Include="Harmony\ThingOwner.cs" />
+    <Compile Include="Harmony\Verb.cs" />
+    <Compile Include="Jobs\JobDriver_EquipOffHand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Record.cs" />
+    <Compile Include="Stances\Stance_Cooldown_DW.cs" />
+    <Compile Include="Stances\Stance_Warmup_DW.cs" />
+    <Compile Include="Storage\ExtendedDataStorage.cs" />
+    <Compile Include="Storage\ExtendedPawnData.cs" />
+    <Compile Include="Storage\ExtendedThingWithCompsData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="HugsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UnlimitedHugs.Rimworld.HugsLib.8.0.0\lib\net472\HugsLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

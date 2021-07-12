@@ -1,10 +1,12 @@
 ﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI;
 
 namespace DualWield.Harmony
 {
@@ -25,7 +27,7 @@ namespace DualWield.Harmony
         public static bool FullBodyBusyOrOffHandCooldown(Pawn_StanceTracker instance)
         {
             bool result = false;
-            Pawn pawn = instance.pawn;
+            Pawn pawn = instance.pawn; 
             if (pawn.GetStancesOffHand() is Pawn_StanceTracker stancesOffHand)
             {
                 if (pawn.GetStancesOffHand() is Pawn_StanceTracker offHandStance && offHandStance.curStance is Stance_Cooldown && !RunAndGunEnabled(pawn))

@@ -14,7 +14,7 @@ namespace DualWield
         //Tag offhand equipment so it can be recognised as offhand equipment during later evaluations. 
         public static void AddOffHandEquipment(this Pawn_EquipmentTracker instance, ThingWithComps newEq)
         {
-            ThingOwner<ThingWithComps> equipment = Traverse.Create(instance).Field("equipment").GetValue<ThingOwner<ThingWithComps>>();
+            ThingOwner<ThingWithComps> equipment = instance.equipment;
             ExtendedDataStorage store = Base.Instance.GetExtendedDataStorage();
             if(store != null)
             {

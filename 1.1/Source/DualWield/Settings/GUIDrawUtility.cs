@@ -369,7 +369,6 @@ namespace DualWield.Settings
         {
             //TODO: refactor this mess, remove redundant and quircky things.
 
-            float rowHeight = 20f;
             if (setting.Value == null)
             {
                 setting.Value = new DictRecordHandler();

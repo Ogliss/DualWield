@@ -17,7 +17,7 @@ namespace DualWield.Harmony
         {
             IntVec3 c = IntVec3.FromVector3(clickPos);
 
-            foreach (LocalTargetInfo current in GenUI.TargetsAt(clickPos, TargetingParameters.ForSelf(pawn), true))
+            foreach (LocalTargetInfo current in GenUI.TargetsAt_NewTemp(clickPos, TargetingParameters.ForSelf(pawn), true))
             {
                 if (pawn.equipment.TryGetOffHandEquipment(out ThingWithComps eq))
                 {

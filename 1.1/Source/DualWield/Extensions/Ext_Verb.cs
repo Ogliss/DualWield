@@ -26,7 +26,7 @@ namespace DualWield
             {
                 return false;
             }
-            Traverse.Create(instance).Field("currentTarget").SetValue(castTarg);
+            instance.currentTarget = castTarg;
             if (instance.CasterIsPawn && instance.verbProps.warmupTime > 0f)
             {
                 ShootLine newShootLine;

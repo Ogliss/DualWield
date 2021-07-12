@@ -20,7 +20,7 @@ namespace DualWield.Harmony
             var instructionsList = new List<CodeInstruction>(instructions);
             foreach (CodeInstruction instruction in instructionsList)
             {
-                if (instruction.operand == typeof(Pawn_EquipmentTracker).GetMethod("get_Primary"))
+                if (instruction.OperandIs(typeof(Pawn_EquipmentTracker).GetMethod("get_Primary")))
                 {
                     yield return new CodeInstruction(OpCodes.Call, typeof(Pawn_EquipmentTracker_AddEquipment).GetMethod("PrimaryNoOffHand"));
                 }
@@ -71,7 +71,7 @@ namespace DualWield.Harmony
                 {
                     DropOffHand(__instance, eq, offHand);
                     string herHis = __instance.pawn.story.bodyType == BodyTypeDefOf.Male ? "DW_HerHis_Male".Translate() : "DW_HerHis_Female".Translate();
-                    Messages.Message("DW_Message_UnequippedOffHand".Translate(new object[] { __instance.pawn.Name.ToStringShort, herHis }), new LookTargets(__instance.pawn), MessageTypeDefOf.CautionInput);
+                    Messages.Message("DW_Message_UnequippedOffHand".Translate(__instance.pawn.Name.ToStringShort, herHis), new LookTargets(__instance.pawn), MessageTypeDefOf.CautionInput);
                 }
                 return true;
             }

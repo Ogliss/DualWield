@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DualWield", "DualWield\DualWield.csproj", "{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD54C83-31D8-4465-B8BC-9EA2E6EBC1E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77143D90-B94D-41E8-80F3-DD09C7B81C9D}
+	EndGlobalSection
+EndGlobal

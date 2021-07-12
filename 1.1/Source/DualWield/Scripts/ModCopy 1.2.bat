@@ -1,0 +1,1 @@
+robocopy "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld1.2\Mods\DualWield" /MIR /xd .git Source Ideology 1.3 /xf "*.zip" "*.7z" "*.psd" "*.psb" "*.md" ".gitattributes" ".gitignore" "LICENSE" 

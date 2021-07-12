@@ -29,7 +29,7 @@ namespace DualWield.Harmony
                 }
             }
         }
-        private static Command_VerbTarget CreateVerbTargetCommand(VerbTracker __instance, Thing ownerThing, Verb verb)
+        private static Command_VerbTarget CreateVerbTargetCommand(Thing ownerThing, Verb verb)
         {
 
             Command_VerbTarget command_VerbTarget = new Command_VerbTarget();
@@ -88,7 +88,7 @@ namespace DualWield.Harmony
     [HarmonyPatch(typeof(VerbTracker), "GetVerbsCommands")]
     class VerbTracker_GetVerbsCommands_Postfix
     {
-        static void Postfix(VerbTracker __instance, ref IEnumerable<Command> __result)
+        static void Postfix(ref IEnumerable<Command> __result)
         {
             __result = RemoveCommandForOffHand(__result);
         }
@@ -103,7 +103,7 @@ namespace DualWield.Harmony
 
                     if (verb.EquipmentSource is ThingWithComps twc && twc.ParentHolder is Pawn_EquipmentTracker peqt)
                     {
-                        bool offhandIsPrimary = false;
+                    //    bool offhandIsPrimary = false;
                         //Remove offhand gizmo when dual wielding
                         //Don't remove offhand gizmo when offhand weapon is the only weapon being carried by the pawn
                         if (peqt.pawn.equipment.TryGetOffHandEquipment(out ThingWithComps offHandEquip) && offHandEquip == twc && offHandEquip != peqt.Primary)

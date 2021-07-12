@@ -33,12 +33,43 @@ namespace DualWield.Harmony
     [HarmonyPatch(typeof(Pawn_MeleeVerbs),"TryMeleeAttack")]
     class Pawn_MeleeVerbs_TryMeleeAttack
     {
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var instructionsList = new List<CodeInstruction>(instructions);
+            IEnumerable<CodeInstruction> newInstructions =
+            instructions.MethodReplacer(typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy"), typeof(Pawn_MeleeVerbs_TryMeleeAttack).GetMethod("FullBodyAndOffHandBusy"));
+            return newInstructions;
+            /*
+            foreach (CodeInstruction instruction in instructionsList)
+            {
+                if(instruction.OperandIs(typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy")))
+                {
+                    yield return new CodeInstruction(OpCodes.Call, typeof(Jobdriver_Wait_CheckForAutoAttack).GetMethod("FullBodyAndOffHandBusy"));
+                }
+                else
+                {
+                    yield return instruction;
+                }
+            }
+            */
+        }
+        public static bool FullBodyAndOffHandBusy(Pawn_StanceTracker instance)
+        {
+            bool busy = instance.stunner.Stunned || instance.curStance.StanceBusy;
+            if (Prefs.DevMode && instance.pawn == Find.Selector.SingleSelectedThing && KeyBindingDefOf.ModifierIncrement_100x.IsDown)
+            {
+                Log.Warning(instance.pawn + " TryMeleeAttack FullBodyAndOffHandBusy: " + busy + " Mainhand Busy: " + busy);
+            }
+            return busy;
+        }
+
         static void Postfix(Pawn_MeleeVerbs __instance, Thing target, Verb verbToUse, bool surpriseAttack, ref bool __result, ref Pawn ___pawn)
         {
             if (___pawn.GetStancesOffHand() == null || ___pawn.GetStancesOffHand().curStance is Stance_Warmup_DW || ___pawn.GetStancesOffHand().curStance is Stance_Cooldown)
             {
                 return;
             }
+            else if (Prefs.DevMode && __instance.pawn == Find.Selector.SingleSelectedThing && ___pawn.GetStancesOffHand() != null) Log.Message("curOffHandStance:: " + ___pawn.GetStancesOffHand().curStance.GetType().Name);
             if (___pawn.equipment == null || !___pawn.equipment.TryGetOffHandEquipment(out ThingWithComps offHandEquip))
             {
                 return;
@@ -51,13 +82,20 @@ namespace DualWield.Harmony
             {
                 return;
             }
+            bool sucess = TryOffhandAttack(__instance, target);
+            if (!sucess && Prefs.DevMode && __instance.pawn == Find.Selector.SingleSelectedThing) Log.Warning("OffhandAttack Failed");
+            __result = __result || sucess;
 
+
+        }
+        public static bool TryOffhandAttack(Pawn_MeleeVerbs __instance, Thing target)
+        {
             Verb verb = __instance.Pawn.TryGetMeleeVerbOffHand(target);
-            if(verb != null)
+            if (verb != null)
             {
-                bool success = verb.OffhandTryStartCastOn(target);
-                __result = __result || (verb != null && success);
+                return verb.OffhandTryStartCastOn(target);
             }
+            return false;
         }
     }
 }

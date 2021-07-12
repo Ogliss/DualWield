@@ -17,42 +17,47 @@ namespace DualWield
         public static Base Instance { get; private set; }
         ExtendedDataStorage _extendedDataStorage;
         public override string ModIdentifier => "Roolo.DualWield";
+        public static bool using_yayoCombat = false;
 
-        internal static SettingHandle<bool> settingsGroup_Drawing;
-        internal static SettingHandle<bool> settingsGroup_DualWield;
-        internal static SettingHandle<bool> settingsGroup_TwoHand;
-        internal static SettingHandle<bool> settingsGroup_Penalties;
-
-
-        internal static SettingHandle<DictRecordHandler> dualWieldSelection;
-        internal static SettingHandle<DictRecordHandler> twoHandSelection;
-        internal static SettingHandle<DictRecordHandler> customRotations;
-
-        internal static SettingHandle<float> staticCooldownPOffHand;
-        internal static SettingHandle<float> staticCooldownPMainHand;
-        internal static SettingHandle<float> staticAccPOffHand;
-        internal static SettingHandle<float> staticAccPMainHand;
-        internal static SettingHandle<float> dynamicCooldownP;
-        internal static SettingHandle<float> dynamicAccP;
-
-        internal static SettingHandle<float> meleeAngle;
-        internal static SettingHandle<float> rangedAngle;
-        internal static SettingHandle<float> meleeXOffset;
-        internal static SettingHandle<float> rangedXOffset;
-        internal static SettingHandle<float> meleeZOffset;
-        internal static SettingHandle<float> rangedZOffset;
-
-        internal static SettingHandle<bool> meleeMirrored;
-        internal static SettingHandle<bool> rangedMirrored;
+        public static SettingHandle<bool> settingsGroup_Drawing;
+        public static SettingHandle<bool> settingsGroup_DualWield;
+        public static SettingHandle<bool> settingsGroup_TwoHand;
+        public static SettingHandle<bool> settingsGroup_Penalties;
 
 
-        internal static SettingHandle<string> note;
+        public static SettingHandle<DictRecordHandler> dualWieldSelection;
+        public static SettingHandle<DictRecordHandler> twoHandSelection;
+        public static SettingHandle<DictRecordHandler> customRotations;
 
-        internal static SettingHandle<int> NPCDualWieldChance;
+        public static SettingHandle<float> staticCooldownPOffHand;
+        public static SettingHandle<float> staticCooldownPMainHand;
+        public static SettingHandle<float> staticAccPOffHand;
+        public static SettingHandle<float> staticAccPMainHand;
+        public static SettingHandle<float> dynamicCooldownP;
+        public static SettingHandle<float> dynamicAccP;
+
+        public static SettingHandle<float> meleeAngle;
+        public static SettingHandle<float> rangedAngle;
+        public static SettingHandle<float> meleeXOffset;
+        public static SettingHandle<float> rangedXOffset;
+        public static SettingHandle<float> meleeZOffset;
+        public static SettingHandle<float> rangedZOffset;
+
+        public static SettingHandle<bool> meleeMirrored;
+        public static SettingHandle<bool> rangedMirrored;
+
+
+        public static SettingHandle<string> note;
+
+        public static SettingHandle<int> NPCDualWieldChance;
 
 
         public Base()
         {
+            if (ModsConfig.ActiveModsInLoadOrder.Any(mod => mod.PackageId.ToLower().Contains("yayo.combat".ToLower())))
+            {
+                using_yayoCombat = true;
+            }
             Instance = this;
         }
         public override void DefsLoaded()
@@ -119,7 +124,7 @@ namespace DualWield
                     RemoveDepricatedRecords(allWeapons, dualWieldSelection.Value.inner);
                 }
             }
-            dualWieldSelection.CustomDrawer = rect => { return GUIDrawUtility.CustomDrawer_MatchingThingDefs_active(rect, dualWieldSelection, GetDualWieldDefaults(allWeapons), allWeapons, "DW_Setting_DualWield_OK".Translate(), "DW_Setting_DualWield_NOK".Translate(), twoHandSelection.Value != null ? twoHandSelection.Value.inner : null, "DW_Setting_DualWield_DisabledReason".Translate()); };
+            dualWieldSelection.CustomDrawer = rect => { return GUIDrawUtility.CustomDrawer_MatchingThingDefs_active(rect, dualWieldSelection, GetDualWieldDefaults(allWeapons), allWeapons, "DW_Setting_DualWield_OK".Translate(), "DW_Setting_DualWield_NOK".Translate(), twoHandSelection.Value?.inner, "DW_Setting_DualWield_DisabledReason".Translate()); };
             dualWieldSelection.VisibilityPredicate = delegate { return settingsGroup_DualWield; };
 
             //settingsGroup_TwoHand
@@ -137,7 +142,7 @@ namespace DualWield
                     RemoveDepricatedRecords(allWeapons, twoHandSelection.Value.inner);
                 }
             }
-            twoHandSelection.CustomDrawer = rect => { return GUIDrawUtility.CustomDrawer_MatchingThingDefs_active(rect, twoHandSelection, GetTwoHandDefaults(allWeapons), allWeapons, "DW_Setting_TwoHanded_OK".Translate(), "DW_Setting_TwoHanded_NOK".Translate(), dualWieldSelection.Value != null ? dualWieldSelection.Value.inner : null, "DW_Setting_TwoHand_DisabledReason".Translate()); };
+            twoHandSelection.CustomDrawer = rect => { return GUIDrawUtility.CustomDrawer_MatchingThingDefs_active(rect, twoHandSelection, GetTwoHandDefaults(allWeapons), allWeapons, "DW_Setting_TwoHanded_OK".Translate(), "DW_Setting_TwoHanded_NOK".Translate(), dualWieldSelection.Value?.inner, "DW_Setting_TwoHand_DisabledReason".Translate()); };
             twoHandSelection.VisibilityPredicate = delegate { return settingsGroup_TwoHand; };
 
             //settingsGroup_Penalties
@@ -161,18 +166,24 @@ namespace DualWield
 
             if (customRotations.Value == null)
             {
-                customRotations.Value = new DictRecordHandler();
-                customRotations.Value.inner = GetRotationDefaults(allWeapons);
+                customRotations.Value = new DictRecordHandler
+                {
+                    inner = GetRotationDefaults(allWeapons)
+                };
             }
             if(twoHandSelection.Value == null)
             {
-                twoHandSelection.Value = new DictRecordHandler();
-                twoHandSelection.Value.inner = GetTwoHandDefaults(allWeapons);
+                twoHandSelection.Value = new DictRecordHandler
+                {
+                    inner = GetTwoHandDefaults(allWeapons)
+                };
             }
             if(dualWieldSelection.Value == null)
             {
-                dualWieldSelection.Value = new DictRecordHandler();
-                dualWieldSelection.Value.inner = GetDualWieldDefaults(allWeapons);
+                dualWieldSelection.Value = new DictRecordHandler
+                {
+                    inner = GetDualWieldDefaults(allWeapons)
+                };
             }
         }
 

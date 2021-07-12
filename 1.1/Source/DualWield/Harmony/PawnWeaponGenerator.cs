@@ -16,8 +16,8 @@ namespace DualWield.Harmony
             if (pawn.RaceProps.Humanlike && Rand.Chance(((float)Base.NPCDualWieldChance)/100f))
             {
                 float randomInRange = pawn.kindDef.weaponMoney.RandomInRange;
-                List<ThingStuffPair> allWeaponPairs = Traverse.Create(typeof(PawnWeaponGenerator)).Field("allWeaponPairs").GetValue<List<ThingStuffPair>>();
-                List<ThingStuffPair> workingWeapons = Traverse.Create(typeof(PawnWeaponGenerator)).Field("workingWeapons").GetValue<List<ThingStuffPair>>();
+                List<ThingStuffPair> allWeaponPairs = PawnWeaponGenerator.allWeaponPairs;
+                List<ThingStuffPair> workingWeapons = PawnWeaponGenerator.workingWeapons;
                 if (pawn.equipment != null && pawn.equipment.Primary != null && pawn.equipment.Primary.def.IsTwoHand())
                 {
                     return;
