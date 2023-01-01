@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.2": {
-      "Krafs.Rimworld.Ref/1.4.3530": {
+      "Krafs.Rimworld.Ref/1.4.3580": {
         "type": "package",
         "compile": {
           "ref/net472/Assembly-CSharp-firstpass.dll": {},
@@ -89,10 +89,14 @@
       "Lib.Harmony/2.2.2": {
         "type": "package",
         "compile": {
-          "lib/net472/0Harmony.dll": {}
+          "lib/net472/0Harmony.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net472/0Harmony.dll": {}
+          "lib/net472/0Harmony.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Build.Framework/15.1.548": {
@@ -107,10 +111,14 @@
           "System.Threading.Thread": "4.0.0"
         },
         "compile": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Build.Utilities.Core/15.1.548": {
@@ -119,10 +127,14 @@
           "Microsoft.Build.Framework": "[15.1.548]"
         },
         "compile": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net46/_._": {}
+          "lib/net46/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Collections/4.0.11": {
@@ -211,26 +223,30 @@
           "Lib.Harmony": "2.2.2"
         },
         "compile": {
-          "lib/net472/HugsLib.dll": {}
+          "lib/net472/HugsLib.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net472/_._": {}
+          "lib/net472/_._": {
+            "related": ".xml"
+          }
         }
       }
     }
   },
   "libraries": {
-    "Krafs.Rimworld.Ref/1.4.3530": {
-      "sha512": "uXrr/UUaofz351nE/6fQlbXbCPok52BHyWa5oxmtsMh79JzNvjsT5Af8sK/pOC/W60uzDv+NekquglH4YebMog==",
+    "Krafs.Rimworld.Ref/1.4.3580": {
+      "sha512": "1fA57QZ6jcqvbcfwRLAQA/Si46dS+t7JaRZY2TSvL+T8SK1oY1RPpimWqYwIRAUsh1RGAPXL/RwPbnW+8y4oIQ==",
       "type": "package",
-      "path": "krafs.rimworld.ref/1.4.3530",
+      "path": "krafs.rimworld.ref/1.4.3580",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "README.md",
         "icon.png",
-        "krafs.rimworld.ref.1.4.3530.nupkg.sha512",
+        "krafs.rimworld.ref.1.4.3580.nupkg.sha512",
         "krafs.rimworld.ref.nuspec",
         "ref/net472/Assembly-CSharp-firstpass.dll",
         "ref/net472/Assembly-CSharp.dll",
@@ -896,14 +912,14 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
-      "Krafs.Rimworld.Ref >= 1.4.3530",
+      "Krafs.Rimworld.Ref >= 1.4.3580",
       "Lib.Harmony >= 2.2.2",
       "TaskPubliciser >= 1.0.3",
       "UnlimitedHugs.Rimworld.HugsLib >= 10.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\roolo\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.3.0",
@@ -911,11 +927,11 @@
       "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\DualWield\\1.4\\Source\\DualWield\\DualWield.csproj",
       "projectName": "DualWield",
       "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\DualWield\\1.4\\Source\\DualWield\\DualWield.csproj",
-      "packagesPath": "C:\\Users\\roolo\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
       "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\DualWield\\1.4\\Source\\DualWield\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\roolo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -943,7 +959,7 @@
         "dependencies": {
           "Krafs.Rimworld.Ref": {
             "target": "Package",
-            "version": "[1.4.3530, )",
+            "version": "[1.4.3580, )",
             "generatePathProperty": true
           },
           "Lib.Harmony": {
@@ -962,7 +978,7 @@
             "version": "[10.0.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
