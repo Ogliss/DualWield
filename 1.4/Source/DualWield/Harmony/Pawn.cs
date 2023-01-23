@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     //Tick the stance tracker of the offfhand weapon
     [HarmonyPatch(typeof(Pawn), "Tick")]

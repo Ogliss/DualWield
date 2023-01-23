@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     //This patch prevent an error thrown when a offhand weapon is equipped and the primary weapon is switched. 
     [HarmonyPatch(typeof(Pawn_EquipmentTracker), "AddEquipment")]

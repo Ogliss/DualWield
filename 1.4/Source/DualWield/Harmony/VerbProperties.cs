@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     [HarmonyPatch(typeof(VerbProperties), "AdjustedCooldown")]
     [HarmonyPatch(new Type[]{typeof(Tool), typeof(Pawn), typeof(Thing)})]

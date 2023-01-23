@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     [HarmonyPatch(typeof(Pawn_RotationTracker), "UpdateRotation")]
     class Pawn_RotationTracker_UpdateRotation

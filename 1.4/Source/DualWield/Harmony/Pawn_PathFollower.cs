@@ -8,7 +8,7 @@ using System.Text;
 using Verse;
 using Verse.AI;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
 
 

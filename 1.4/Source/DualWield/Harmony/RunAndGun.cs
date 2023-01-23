@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     /**
      * Since a Run and Gun transpiler targets exactly the same line of code we want to target, we add this patch for compatbility. We basically postfix the method used by RunAndGun on the same line. We use "TargetMethod()" to target the to be patched method in RunAndGun without introducing a dependency. 

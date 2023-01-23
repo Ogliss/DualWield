@@ -1,5 +1,6 @@
 ﻿using DualWield.Settings;
 using DualWield.Storage;
+using HarmonyLib;
 using HugsLib;
 using HugsLib.Settings;
 using HugsLib.Utils;
@@ -54,6 +55,7 @@ namespace DualWield
         public Base()
         {
             Instance = this;
+
         }
         public override void DefsLoaded()
         {

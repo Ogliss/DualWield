@@ -9,7 +9,7 @@ using System.Text;
 using UnityEngine;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
 
     [HarmonyPatch(typeof(VerbTracker), "CreateVerbTargetCommand")]

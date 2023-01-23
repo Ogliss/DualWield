@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     [HarmonyPatch(typeof(Verb_MeleeAttack), "TryCastShot")]
     class Verb_MeleeAttack_TryCastShot

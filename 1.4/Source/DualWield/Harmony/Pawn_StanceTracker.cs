@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     [HarmonyPatch(typeof(Pawn_StanceTracker), "get_FullBodyBusy")]
     class Pawn_StanceTracker_FullBodyBusy

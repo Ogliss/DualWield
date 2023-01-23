@@ -8,7 +8,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace DualWield.Harmony
+namespace DualWield.HarmonyInstance 
 {
     [HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
     class FloatMenuMakerMap_AddHumanlikeOrders
