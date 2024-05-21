@@ -9,3 +9,5 @@ C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Source
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Source\DualWield\obj\Release\DualWield.csproj.CopyComplete
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Source\DualWield\obj\Release\DualWield.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Source\DualWield\obj\Release\DualWield.pdb
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Assemblies\DualWield.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Assemblies\DualWield.pdb

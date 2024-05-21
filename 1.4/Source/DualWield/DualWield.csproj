@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\DualWield\1.4\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,6 +43,8 @@
     <Compile Include="Base.cs" />
     <Compile Include="Command_DualWield.cs" />
     <Compile Include="Harmony\Jobdriver_Wait.cs" />
+    <Compile Include="Harmony\PawnRenderer_DrawEquipment.cs" />
+    <Compile Include="Harmony\PawnRenderer_DrawEquipmentAiming.cs" />
     <Compile Include="Harmony\Pawn_StanceTracker.cs" />
     <Compile Include="Harmony\VerbTracker.cs" />
     <Compile Include="ModExtension\DefModextension_CustomRotation.cs" />
@@ -61,7 +63,7 @@
     <Compile Include="Harmony\Pawn_PathFollower.cs" />
     <Compile Include="Harmony\Pawn.cs" />
     <Compile Include="Harmony\PawnComponentsUtility.cs" />
-    <Compile Include="Harmony\PawnRenderer.cs" />
+    <Compile Include="Harmony\PawnRenderer_RenderPawnAt.cs" />
     <Compile Include="Harmony\FloatMenuMakerMap.cs" />
     <Compile Include="Harmony\PawnWeaponGenerator.cs" />
     <Compile Include="Harmony\Pawn_EquipmentTracker.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="Storage\ExtendedThingWithCompsData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.4.3613" GeneratePathProperty="true" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.4.3901" GeneratePathProperty="true" />
     <PackageReference Include="Lib.Harmony">
       <Version>2.2.2</Version>
     </PackageReference>

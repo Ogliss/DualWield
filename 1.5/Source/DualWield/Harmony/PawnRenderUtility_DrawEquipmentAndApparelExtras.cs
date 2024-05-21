@@ -1,62 +1,43 @@
 ﻿using DualWield.Settings;
 using HarmonyLib;
-using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using UnityEngine;
 using Verse;
 
-namespace DualWield.HarmonyInstance 
+namespace DualWield.HarmonyInstance
 {
-    [HarmonyPatch(typeof(PawnRenderer), "RenderPawnAt")]
-    class PawnRenderer_RenderPawnAt
-    {
-        static void Postfix(PawnRenderer __instance, ref Pawn ___pawn)
-        {
-            if (___pawn.Spawned && !___pawn.Dead)
-            {
-                ___pawn.GetStancesOffHand().StanceTrackerDraw();
-            }
-        }
-
-    }
-    [HarmonyPatch(typeof(PawnRenderer), "DrawEquipment")]
-    public class PawnRenderer_DrawEquipment
+    [HarmonyPatch(typeof(PawnRenderUtility), "DrawEquipmentAndApparelExtras")]
+    public class PawnRenderUtility_DrawEquipmentAndApparelExtras
     {
         
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            MethodInfo drawEquipmentAiming = AccessTools.Method(typeof(PawnRenderer), nameof(PawnRenderer.DrawEquipmentAiming));
-            MethodInfo drawEquipmentAimingModified = AccessTools.Method(typeof(PawnRenderer_DrawEquipment), nameof(PawnRenderer_DrawEquipment.DrawEquipmenModified));
+            MethodInfo drawEquipmentAiming = AccessTools.Method(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawEquipmentAiming));
+            MethodInfo drawEquipmentAimingModified = AccessTools.Method(typeof(PawnRenderUtility_DrawEquipmentAndApparelExtras), nameof(PawnRenderUtility_DrawEquipmentAndApparelExtras.DrawEquipmenModified));
             var instructionsList = new List<CodeInstruction>(instructions);
             for (int i = 0; i < instructionsList.Count; i++)
             {
                 CodeInstruction instruction = instructionsList[i];
-                
-                    if (instruction.OperandIs(drawEquipmentAiming))
-                    {
+                if (instruction.OperandIs(drawEquipmentAiming))
+                {
                         if (drawEquipmentAimingModified != null)
                         {
+                            yield return new CodeInstruction(OpCodes.Ldarg_0);
                             instruction = new CodeInstruction(OpCodes.Call, drawEquipmentAimingModified);
                         }
-                    }
-                
-                
+                }
                 yield return instruction;
             }
         }
 
-        public static void DrawEquipmenModified(PawnRenderer __instance, Thing eq, Vector3 drawLoc, float aimAngle)
+        public static void DrawEquipmenModified(Thing eq, Vector3 drawLoc, float aimAngle, Pawn pawn)
         {
             ThingWithComps offHandEquip = null;
-            Pawn pawn = __instance.pawn;
             if (pawn.equipment == null)
             {
-                __instance.DrawEquipmentAiming(eq, drawLoc, aimAngle);
+                PawnRenderUtility.DrawEquipmentAiming(eq, drawLoc, aimAngle);
                 return;
             }
             if (pawn.equipment.TryGetOffHandEquipment(out ThingWithComps result))
@@ -65,7 +46,7 @@ namespace DualWield.HarmonyInstance
             }
             if (offHandEquip == null)
             {
-                __instance.DrawEquipmentAiming(eq, drawLoc, aimAngle);
+                PawnRenderUtility.DrawEquipmentAiming(eq, drawLoc, aimAngle);
                 return;
             }
             float mainHandAngle = aimAngle;
@@ -101,18 +82,18 @@ namespace DualWield.HarmonyInstance
                 //drawLoc += offsetMainHand;
                 //aimAngle = mainHandAngle;
                 //__instance.DrawEquipmentAiming(eq, drawLoc + offsetMainHand, mainHandAngle);
-                __instance.DrawEquipmentAiming(eq, drawLoc + offsetMainHand, mainHandAngle);
+                PawnRenderUtility.DrawEquipmentAiming(eq, drawLoc + offsetMainHand, mainHandAngle);
             }
             if ((offHandAiming || mainHandAiming) && focusTarg != null)
             {
                 offHandAngle = GetAimingRotation(pawn, focusTarg);
                 offsetOffHand.y += 0.1f;
                 Vector3 adjustedDrawPos = pawn.DrawPos + new Vector3(0f, 0f, 0.4f).RotatedBy(offHandAngle) + offsetOffHand;
-                __instance.DrawEquipmentAiming(offHandEquip, adjustedDrawPos, offHandAngle);
+                PawnRenderUtility.DrawEquipmentAiming(offHandEquip, adjustedDrawPos, offHandAngle);
             }
             else
             {
-                __instance.DrawEquipmentAiming(offHandEquip, drawLoc + offsetOffHand, offHandAngle);
+                PawnRenderUtility.DrawEquipmentAiming(offHandEquip, drawLoc + offsetOffHand, offHandAngle);
             }
         }
 

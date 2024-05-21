@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7kGDn4PC08OMN7HInsE40vNTX9282a6m3VdXI3UZmnrdtj7KxqMkIWuIjYpXisAy31qSJHARPiDMsK5YvZTupw==",
+  "dgSpecHash": "TXy3dhBznNJPI5G9UajGUP0OoudydC8hs/ls6Ut4ocDpnOg1x2CQG1vnO43UQzol420m704xx4zbYrHqPnymAA==",
   "success": true,
   "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\DualWield\\1.4\\Source\\DualWield\\DualWield.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\User\\.nuget\\packages\\krafs.rimworld.ref\\1.4.3613\\krafs.rimworld.ref.1.4.3613.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\krafs.rimworld.ref\\1.4.3901\\krafs.rimworld.ref.1.4.3901.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\lib.harmony\\2.2.2\\lib.harmony.2.2.2.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.build.framework\\15.1.548\\microsoft.build.framework.15.1.548.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.build.utilities.core\\15.1.548\\microsoft.build.utilities.core.15.1.548.nupkg.sha512",

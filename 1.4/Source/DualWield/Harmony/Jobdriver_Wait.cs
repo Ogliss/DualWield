@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using Verse;
@@ -16,11 +17,14 @@ namespace DualWield.HarmonyInstance
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var instructionsList = new List<CodeInstruction>(instructions);
+            MethodInfo fullBodyBusy = typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy");
+            MethodInfo fullBodyAndOffhandBusy = typeof(Jobdriver_Wait_CheckForAutoAttack).GetMethod("FullBodyAndOffHandBusy");
+
             foreach (CodeInstruction instruction in instructionsList)
             {
-                if(instruction.operand == typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy"))
+                if(instruction.OperandIs(fullBodyBusy) && fullBodyAndOffhandBusy != null)
                 {
-                    yield return new CodeInstruction(OpCodes.Call, typeof(Jobdriver_Wait_CheckForAutoAttack).GetMethod("FullBodyAndOffHandBusy"));
+                    yield return new CodeInstruction(OpCodes.Call, fullBodyAndOffhandBusy);
                 }
                 else
                 {

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.2": {
-      "Krafs.Rimworld.Ref/1.4.3613": {
+      "Krafs.Rimworld.Ref/1.4.3901": {
         "type": "package",
         "compile": {
           "ref/net472/Assembly-CSharp-firstpass.dll": {},
@@ -237,17 +237,17 @@
     }
   },
   "libraries": {
-    "Krafs.Rimworld.Ref/1.4.3613": {
-      "sha512": "LSO/ixJ6HtlrFtu5vOh6Ycf+du70WUUFyCs3LU5tqFUR0eeyaqgdTNxfPGMVzNeoGn6CzP8E9M70+beFH7QArg==",
+    "Krafs.Rimworld.Ref/1.4.3901": {
+      "sha512": "CdGJZ8/Ykq4EqwqdkenU4htlnJm8kS8eY+/XOjgbKgJdWXslOrHSViYM9vd6FM9S7cpoIqIj5cMol0DTmSV0Rg==",
       "type": "package",
-      "path": "krafs.rimworld.ref/1.4.3613",
+      "path": "krafs.rimworld.ref/1.4.3901",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "README.md",
         "icon.png",
-        "krafs.rimworld.ref.1.4.3613.nupkg.sha512",
+        "krafs.rimworld.ref.1.4.3901.nupkg.sha512",
         "krafs.rimworld.ref.nuspec",
         "ref/net472/Assembly-CSharp-firstpass.dll",
         "ref/net472/Assembly-CSharp.dll",
@@ -915,7 +915,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
-      "Krafs.Rimworld.Ref >= 1.4.3613",
+      "Krafs.Rimworld.Ref >= 1.4.3901",
       "Lib.Harmony >= 2.2.2",
       "TaskPubliciser >= 1.0.3",
       "UnlimitedHugs.Rimworld.HugsLib >= 10.0.1"
@@ -962,7 +962,7 @@
         "dependencies": {
           "Krafs.Rimworld.Ref": {
             "target": "Package",
-            "version": "[1.4.3613, )",
+            "version": "[1.4.3901, )",
             "generatePathProperty": true
           },
           "Lib.Harmony": {

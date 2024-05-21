@@ -28,7 +28,7 @@ namespace DualWield.HarmonyInstance
             Pawn pawn = instance.pawn;
             if (pawn.GetStancesOffHand() is Pawn_StanceTracker stancesOffHand)
             {
-                if (pawn.GetStancesOffHand() is Pawn_StanceTracker offHandStance && offHandStance.curStance is Stance_Cooldown && !RunAndGunEnabled(pawn))
+                if (stancesOffHand.curStance is Stance_Cooldown && !RunAndGunEnabled(pawn))
                 {
                     result = stancesOffHand.curStance.StanceBusy;
                 }

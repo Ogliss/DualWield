@@ -173,7 +173,7 @@ namespace DualWield
             }
             if(dualWieldSelection.Value == null)
             {
-                dualWieldSelection.Value = new DictRecordHandler();
+                dualWieldSelection.Value = new DictRecordHandler(); 
                 dualWieldSelection.Value.inner = GetDualWieldDefaults(allWeapons);
             }
         }
