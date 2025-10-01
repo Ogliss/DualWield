@@ -36,7 +36,7 @@ namespace DualWield.HarmonyInstance
         {
             //Make sure this is called when run and gun patches the same line of code as we do in the harmony Patch Verb_TryCastNextBurstShot. 
             //SetStanceOffHand(stanceTracker, stance);
-            Log.Message("patching run and gun");
+        //    Log.Message("patching run and gun");
             Verb_TryCastNextBurstShot.SetStanceOffHand(stanceTracker, stance);
         }
 

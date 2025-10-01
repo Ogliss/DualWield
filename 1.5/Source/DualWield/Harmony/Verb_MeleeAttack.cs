@@ -3,6 +3,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using Verse;
@@ -15,9 +16,10 @@ namespace DualWield.HarmonyInstance
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var instructionsList = new List<CodeInstruction>(instructions);
+            MethodInfo tgt = typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy");
             foreach (CodeInstruction instruction in instructionsList)
             {
-                if (instruction.operand == typeof(Pawn_StanceTracker).GetMethod("get_FullBodyBusy"))
+                if (instruction.OperandIs(tgt))
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Call, typeof(Verb_MeleeAttack_TryCastShot).GetMethod("CurrentHandBusy"));

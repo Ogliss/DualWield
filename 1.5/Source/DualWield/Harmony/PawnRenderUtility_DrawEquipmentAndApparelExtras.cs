@@ -1,5 +1,7 @@
 ﻿using DualWield.Settings;
 using HarmonyLib;
+using RimWorld.QuestGen;
+using RimWorld;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -7,7 +9,32 @@ using UnityEngine;
 using Verse;
 
 namespace DualWield.HarmonyInstance
-{
+{ 
+
+
+    [HarmonyPatch(typeof(UIRoot_Entry), "Init")]
+    public static class UIRoot_Entry_Init_IncompatibleModifications_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix()
+        {
+            if (AccessTools.TypeByName("Tacticowl.ModSettings_Tacticowl") != null)
+            {
+                UIRoot_Entry_Init_IncompatibleModifications_Patch.CreateHereticalModificationsDialog();
+            }
+        }
+        public static void CreateHereticalModificationsDialog()
+        {
+            string text = "Dual Wield";
+            text += "\n\n";
+            text += "Incompatible version of Run and Gun detected, please use either the one linked on this mods page, or Roolo's.";
+            Find.WindowStack.Add(new Dialog_MessageBox(text, null, null, null, null, null, false, null, null, WindowLayer.Dialog));
+            UIRoot_Entry_Init_IncompatibleModifications_Patch.dialogDone = true;
+        }
+        private static bool dialogDone;
+    }
+
+
     [HarmonyPatch(typeof(PawnRenderUtility), "DrawEquipmentAndApparelExtras")]
     public class PawnRenderUtility_DrawEquipmentAndApparelExtras
     {

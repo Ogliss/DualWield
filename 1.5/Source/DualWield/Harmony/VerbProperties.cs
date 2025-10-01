@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace DualWield.HarmonyInstance 
 {
+    
     [HarmonyPatch(typeof(VerbProperties), "AdjustedCooldown")]
     [HarmonyPatch(new Type[]{typeof(Tool), typeof(Pawn), typeof(Thing)})]
     class VerbProperties_AdjustedCooldown
@@ -24,26 +26,27 @@ namespace DualWield.HarmonyInstance
                 if (equipment != null && equipment is ThingWithComps twc && twc.IsOffHand())
                 {
                     __result = CalcCooldownPenalty(__result, skillRecord, Base.staticCooldownPOffHand/100f);
+                //    Log.Message($"Mainhand CD for {equipment} = {__result}");
                 }
                 else if (attacker.equipment != null && attacker.equipment.TryGetOffHandEquipment(out ThingWithComps offHandEq))
                 {
                     __result = CalcCooldownPenalty(__result, skillRecord, Base.staticCooldownPMainHand/100f);
+                //    Log.Message($"Mainhand CD for {offHandEq} = {__result}");
                 }
             }
-
-
         }
 
         private static float CalcCooldownPenalty(float __result, SkillRecord skillRecord, float staticPenalty)
         {
             //TODO: make mod settings
+            int levelsShort = 20 - Math.Min(skillRecord.Level, 20);
             float perLevelPenalty = Base.dynamicCooldownP/100f;
-            int levelsShort = 20 - skillRecord.levelInt;
             float dynamicPenalty = perLevelPenalty * levelsShort;
             __result *= 1.0f + staticPenalty + dynamicPenalty;
             return __result;
         }
     }
+    
     [HarmonyPatch(typeof(VerbProperties), "AdjustedAccuracy")]
     class VerbProperties_AdjustedAccuracy
     {

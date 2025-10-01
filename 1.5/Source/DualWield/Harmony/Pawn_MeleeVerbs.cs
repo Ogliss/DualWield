@@ -9,6 +9,7 @@ using Verse;
 
 namespace DualWield.HarmonyInstance 
 {
+    
     [HarmonyPatch(typeof(Pawn_MeleeVerbs), "GetUpdatedAvailableVerbsList")]
     class Pawn_MeleeVerbs_GetUpdatedAvailableVerbsList
     {
@@ -27,9 +28,13 @@ namespace DualWield.HarmonyInstance
             {
                 __result.Remove(ve);
             }
+            if (!shouldRemove.EnumerableNullOrEmpty())
+            {
+                Log.Message($"removed {shouldRemove.Count()} Offhand Verbs, {__result.Count()} remaining");
+            }
         }
     }
-
+    
     [HarmonyPatch(typeof(Pawn_MeleeVerbs),"TryMeleeAttack")]
     class Pawn_MeleeVerbs_TryMeleeAttack
     {
@@ -56,10 +61,11 @@ namespace DualWield.HarmonyInstance
             Verb verb = __instance.Pawn.TryGetMeleeVerbOffHand(target);
             if(verb != null)
             {
-                Log.Message($"{__instance.Pawn.Name} MeleeVerbOffHand vs {verb.ReportLabel}");
+                Log.Message($"{__instance.Pawn.Name} MeleeVerbOffHand vs {target.Label}");
                 bool success = verb.OffhandTryStartCastOn(target);
                 __result = __result || (verb != null && success);
             }
         }
     }
+
 }

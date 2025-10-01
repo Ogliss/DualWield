@@ -8,6 +8,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Verse;
 
@@ -51,7 +52,59 @@ namespace DualWield
 
         internal static SettingHandle<int> NPCDualWieldChance;
 
+        static int maxSkillLevel = -1;
+        public static int MaxSkillLevel
+        {
+            get 
+            { 
+                if (maxSkillLevel == -1)
+                {
+                    // Load the assembly
+                    Assembly ass = Base.GetAssemblyByName("EndlessGrowth");
+                    if (ass != null)
+                    {
+                        Log.Message($"EndlessGrowth Loaded");
+                        // Get the type
+                        Type type = ass.GetType("SlimeSenpai.EndlessGrowth.EndlessGrowthModSettings");
+                        if (type != null)
+                        {
+                            Log.Message($"EndlessGrowth settings Loaded");
+                            // Create an instance of the type
+                            object instance = Activator.CreateInstance(type);
 
+                            // Get the field info
+                            FieldInfo fieldInfo = type.GetField("maxLevel", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                            if (fieldInfo != null)
+                            {
+                                Log.Message($"EndlessGrowth maxLevel Loaded");
+                                // Assuming it's a static field, get the field value
+                                int fieldValue = (int)fieldInfo.GetValue(instance);
+
+                                // Print the value
+                                if (fieldValue == -1)
+                                {
+                                    fieldValue = int.MaxValue;
+                                }
+                                Log.Message($"Field value: {fieldValue}");
+                                maxSkillLevel = fieldValue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        maxSkillLevel = 20;
+                    }
+                }
+                Log.Message($"maxSkillLevel value: {maxSkillLevel}");
+                return maxSkillLevel; 
+            }
+        }
+
+        public static Assembly GetAssemblyByName(string name)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().
+                   SingleOrDefault(assembly => assembly.GetName().Name == name);
+        }
         public Base()
         {
             Instance = this;
@@ -176,6 +229,7 @@ namespace DualWield
                 dualWieldSelection.Value = new DictRecordHandler();
                 dualWieldSelection.Value.inner = GetDualWieldDefaults(allWeapons);
             }
+
         }
 
         private static void RemoveDepricatedRecords(List<ThingDef> allWeapons, Dictionary<string, Record> dict)

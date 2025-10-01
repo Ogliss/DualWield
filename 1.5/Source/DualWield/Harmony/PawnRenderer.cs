@@ -16,7 +16,7 @@ namespace DualWield.HarmonyInstance
         {
             if (___pawn.Spawned && !___pawn.Dead)
             {
-                ___pawn.GetStancesOffHand().StanceTrackerDraw();
+                ___pawn.GetStancesOffHand()?.StanceTrackerDraw();
             }
         }
 
@@ -24,6 +24,7 @@ namespace DualWield.HarmonyInstance
 
     // Old patches, no longer used
     // [HarmonyPatch(typeof(PawnRenderer), "DrawEquipmentAiming")]
+    [Obsolete]
     public class PawnRenderer_DrawEquipmentAiming
     {
         /*
@@ -43,6 +44,7 @@ namespace DualWield.HarmonyInstance
             }
         }
         */
+        [Obsolete]
         static bool Prefix(PawnRenderer __instance, Thing eq, ref Vector3 drawLoc, ref float aimAngle, ref Pawn ___pawn)
         {
             ThingWithComps offHandEquip = null;
@@ -108,6 +110,7 @@ namespace DualWield.HarmonyInstance
         }
 
         //Copied from vanilla. 
+        [Obsolete]
         public static void DrawEquipmentAimingOverride(Thing eq, Vector3 drawLoc, float aimAngle)
         {
             float num = aimAngle - 90f;
